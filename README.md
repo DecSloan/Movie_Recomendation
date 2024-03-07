@@ -17,6 +17,7 @@ The function works by analysing each synopsis against the sentence to compare, r
     into space to a planet where the Hulk can live in peace. Unfortunately, Hulk lands on 
     the lanet Sakaar where he is sold into slavery nd trained as a gladiator."""
 
+    # Dictionary containing a set of 10 movies and their matching synopsis'
     movies = {
         "MovieA" : "When Hiccup discovers Toothless isn't the only Night Fury, he must seek 'The Hidden World', a secret Dragon Utopia before a hired tyrant named Grimmel finds it 
     first.", 
@@ -33,15 +34,23 @@ The function works by analysing each synopsis against the sentence to compare, r
         "MovieJ" : "Adapted from the bestselling novel by Madeleine St John, Ladies in Black is an alluring and tender-hearted comedy drama about the lives of a group of department 
     store employees in 1959 Sydney."
     }
-
+    
+    # I have made a seperate list of the keys and the values taken from the movies dictionary 
     sentences = list(movies.values())
     movie_title = list(movies.keys())
 
     model_sentence = nlp(sentence_to_compare)
 
+    # Provide an empty list to store the similarity values in once they have been calculated
+    # We will need this later to get the maximum score from the list of all the scores
     similarity_scores = []
 
-
+    # Created a function to compare the given sentence to the synopsis of the other films and check similarity
+    # The function loops through all of the synopsis in the movie dictionary
+    # Saving a similarity score for each synopsis in the similarity score list
+    # Then it finnds the maximum number in the list (higher number is better match)
+    # It finds the index in the similarity list and gets the relevent movie title using that same index
+    # Then a message is printed with the movie title and the similarity score
     def most_similar_movie(sentence_to_compare, sentences):
         for sentence in sentences:
             similarity = (nlp(sentence)).similarity(model_sentence)
